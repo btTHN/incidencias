@@ -66,8 +66,8 @@ a{
     display: flex;
     justify-content: flex-end;
 }
-.icons i{
-    margin-right: 10px;
+.icons a{
+    margin-right: 20px;
     color: #ffffff;
     font-size: 30px;
 }
