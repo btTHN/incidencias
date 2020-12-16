@@ -1,5 +1,6 @@
 <?php
 require 'db.php';
+session_start();
 class usuario
 {
     public static function login_user($usr, $psw)
@@ -12,6 +13,7 @@ class usuario
             foreach ($results as $row) {
                 if($row['nombre']==$usr&&$row['password']==$psw){
                     $permitir=true;
+                    $_SESSION['usr']=$row['id'];
                 }
             }            
         }
