@@ -1,16 +1,12 @@
 <?php
 require './controllers.php';
 require './model.php';
-
-$urlPath=$_SERVER['REQUEST_URI']; ///incidencias/index.php
-
-$rut= explode('/',$urlPath);
-
-$path = $_SERVER['PATH_INFO'];
-
-if($path){
-    echo 'hola';
+define("access",true);
+if($_SERVER['PATH_INFO']=='inicio'){
+    validar_user($_POST['user'],$_POST['pswd']);
 }
 else{
-    echo 'adios';
+index();
 }
+
+

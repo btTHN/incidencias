@@ -5,3 +5,6 @@ function validar_user($usr,$psw){
         require './inicioProf.php';
     }
 }
+function index(){
+    require './login.php';
+}
