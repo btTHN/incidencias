@@ -4,15 +4,17 @@ class usuario
 {
     public static function login_user($usr, $psw)
     {
+        $permitir = false;
         $link = connection::conectar();
-        $datos_usr = array();
-        try {
-            foreach ($link->query('SELECT * FROM usuarios WHERE nombre = "' . $usr . '"') as $row) {
-                $datos_usr[] = $row;
-            }
-            echo ($datos_usr[0][1]);
-        } catch (PDOException $e) {
-            echo 'Error de conexion ' . $e->getMessage();
+        $stm = $link->query('SELECT nombre, password, role FROM usuarios WHERE nombre = "' . $usr . '"');
+        if ($stm->rowCount() != 0) {
+            $results = $stm->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($results as $row) {
+                if($row['nombre']==$usr&&$row['password']==$psw){
+                    $permitir=true;
+                }
+            }            
         }
+        return $permitir;
     }
 }

@@ -8,7 +8,7 @@
 </head>
 <?php
     require 'model.php';
-    usuario::login_user("david","P@ssw0rd");
+    usuario::login_user("julio","P@ssw0rd");
 ?>
 
 <body>
