@@ -1,3 +1,4 @@
+<?php defined('access') or exit('<h1>Error 404 page not found</h1>'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,12 +41,7 @@
         }
     </style>
 </head>
-<?php
-if (defined('access') === false) {
-    header('HTTP/1.0 403 Forbidden');
-    require 'error404.php';
-} else {
-?>
+
 
     <body>
         <div class="container h-100 w-50">
@@ -62,7 +58,7 @@ if (defined('access') === false) {
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Usuario" name="user">
+                            <input type="text" class="form-control" placeholder="Usuario" name="user" require>
                         </div>
                         <div class="input-group mb-4">
                             <div class="input-group-append">
@@ -80,8 +76,4 @@ if (defined('access') === false) {
         </div>
         </div>
     </body>
-<?php
-}
-?>
-
 </html>

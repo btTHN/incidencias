@@ -1,22 +1,17 @@
 <?php
 require 'db.php';
-session_start();
 class usuario
 {
     public static function login_user($usr, $psw)
     {
-        $permitir = false;
         $link = connection::conectar();
-        $stm = $link->query('SELECT nombre, password, role FROM usuarios WHERE nombre = "' . $usr . '"');
-        if ($stm->rowCount() != 0) {
-            $results = $stm->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($results as $row) {
-                if($row['nombre']==$usr&&$row['password']==$psw){
-                    $permitir=true;
-                    $_SESSION['usr']=$row['id'];
-                }
-            }            
+        $stm = $link->query('SELECT id,nombre, password, role FROM usuarios WHERE nombre = "' . $usr . '" and 
+        password = "' . $psw . '"');
+        if ($stm->rowCount() == 0) {
+            return null;
+        } else {
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+            return $result;
         }
-        return $permitir;
     }
 }
