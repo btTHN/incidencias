@@ -14,4 +14,16 @@ class usuario
             return $result;
         }
     }
+    public static function leerIncProf()
+    {
+        $link = connection::conectar();
+        $stm = $link->query('SELECT id_usuario,fecha_inicio,material,comentario,aula,estado FROM incidencia WHERE id_usuario='
+            . $_SESSION['id_us']);
+        if ($stm->rowCount() == 0) {
+            return null;
+        } else {
+            $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+    }
 }

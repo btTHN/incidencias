@@ -1,19 +1,39 @@
 <?php
-session_start();
-function validar_user($usr, $psw)
-{
-    $datos = usuario::login_user($usr, $psw);
-    if ($datos != null) {
-        foreach ($datos as $row) {
-            $_SESSION['usrid'] = $row;
-        }
-        require './inicioProf.php';
-    }   
-    else{
-        echo 'hola';
-    }
-}
 function index()
 {
     require './login.php';
+}
+function validar_user()
+{
+    if (!isset($_SESSION['id_us'])) {
+        if (isset($_POST['user']) && isset($_POST['pswd'])) {
+            $datos = usuario::login_user($_POST['user'], $_POST['pswd']);
+            if ($datos != null) {
+                $_SESSION['id_us'] = $datos['id'];
+                inicioProf();
+            } else {
+                $_SESSION['error'] = true;
+                index();
+            }
+        } else {
+            $_SESSION['error'] = true;
+            index();
+        }
+    } else {
+        // require './head.php';
+        // require './inicioProf.php';
+        inicioProf();
+    }
+}
+function inicioProf()
+{
+    $datosInc = usuario::leerIncProf();
+    $tablaProf='<table <table id="example" class="table table-striped table-bordered table-hover" style="width: 100%">';
+    $tablaProf.='<thead><tr><th>Name</th><th>Position</th><th>Office</th><th>Age</th><th>Start date</th><th>Salary</th></tr></thead>';    
+    print_r($datosInc);
+    // if ($datosInc != null) {        
+    //     foreach($datosInc as $row){
+    //         echo($row['comentario']);
+    //     }       
+    // }
 }

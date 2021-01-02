@@ -66,8 +66,13 @@
                             </div>
                             <input type="password" class="form-control" placeholder="Password" name="pswd">
                         </div>
+                        <?php
+                        if(isset($_SESSION['error'])){
+                            echo("<div class='alert alert-danger'>Usuario o contraseña incorrectos</div>");                            
+                        }
+                        ?>
                         <div class="input-group mb-4">
-                            <button type="submit" class="btn btn-outline-primary btn-block">Enviar</button>
+                            <button type="submit" class="btn btn-outline-primary btn-block" name="enviar">Enviar</button>
                         </div>
                     </form>
                 </div>
