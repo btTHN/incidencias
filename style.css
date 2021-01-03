@@ -33,8 +33,8 @@ a{
 }
 .title{
     color: #ffffff;
-    background-color: #2174ad;
-    height: 60px;
+    background-color: #3e4d57;
+    height: 100px;
     display: flex;
     align-items: center;
 }
@@ -42,8 +42,7 @@ a{
     background-color: #ffffff;
 }
 .menu-lateral a:hover{
-    text-decoration: none;
-    background-color: lightslategray;
+    text-decoration: none;    
     color: #ffffff;
     font-weight: bold;
 }
@@ -55,7 +54,7 @@ a{
     align-items: center;
     color: #ffffff;
     width: 100%;
-    background-color: #278dcf;
+    background-color: #0A355B;
     height: 60px;
 }
 .btitle{
@@ -70,6 +69,10 @@ a{
     margin-right: 20px;
     color: #ffffff;
     font-size: 30px;
+}
+.active{
+    background-color: lightslategray;
+    font-weight: bold;
 }
 
 
