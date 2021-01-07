@@ -15,4 +15,8 @@ if ($uri2 == 'index.php' && $path == '/inicio') {
     validar_user();
 } elseif ($uri2 == 'index.php' && $path == '/') {
     index();
+} elseif ($uri2 == 'index.php' && $path == '/salir') {
+    index();
+} elseif ($uri2 == 'index.php' && $path == '/incidencias') {
+    incidenciasProf();
 }

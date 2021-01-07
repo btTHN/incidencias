@@ -1,8 +1,21 @@
 <?php
+
+/**
+ * Controlador de la pagina de
+ * inicio de sesion
+ */
 function index()
 {
+    if (isset($_SESSION['id_us'])) {
+        unset($_SESSION['id_us']);
+    }
     require './login.php';
 }
+
+/**
+ * Controlador de validación
+ * del usuario
+ */
 function validar_user()
 {
     if (!isset($_SESSION['id_us'])) {
@@ -10,8 +23,8 @@ function validar_user()
             $datos = usuario::login_user($_POST['user'], $_POST['pswd']);
             if ($datos != null) {
                 $_SESSION['id_us'] = $datos['id'];
-                require './head.php';
-                require './inicioProf.php';
+                $_SESSION['role'] = $datos['role'];
+                inicioProf();
             } else {
                 $_SESSION['error'] = true;
                 index();
@@ -21,18 +34,99 @@ function validar_user()
             index();
         }
     } else {
-        require './head.php';
-        require './inicioProf.php';
+        inicioProf();
     }
 }
 function inicioProf()
 {
-    $datosInc = usuario::leerIncProf();
-    $tablaProf = '<table <table id="example" class="table table-striped table-bordered table-hover" style="width: 100%">';
-    $tablaProf .= '<thead><tr><th>Name</th><th>Position</th><th>Office</th><th>Age</th><th>Start date</th><th>Salary</th></tr></thead>';
-    if ($datosInc != null) {
-        foreach ($datosInc as $row) {
-            echo ($row['comentario']);
+    /**
+     * Depende del estado de la incidencia sumara una variable u otra
+     * y las mostrara en la vista a traves de una Card
+     */
+    $resueltas = 0;
+    $proceso = 0;
+    $pendientes = 0;
+    $datosInci = usuario::leerIncProf();
+    if ($datosInci != null) {
+        foreach ($datosInci as $row) {
+            switch ($row['estado']) {
+                case 0:
+                    $pendientes++;
+                    break;
+                case 1:
+                    $proceso++;
+                    break;
+                case 2:
+                    $resueltas++;
+                    break;
+            }
+        }       
+    }
+
+    /**
+     * Creara una tabla con las 5 incidencias recientes
+     * si no encuentra incidencias por defecto mostrara
+     * "Sin incidencias"
+     */
+    $datosInci = usuario::incidenciasRecientes();
+    if ($datosInci != null) {
+        $tablaInc = "";
+        foreach ($datosInci as $row) {
+            $tablaInc .= "<tr><td>" . $row['fecha_inicio'] . "</td>";
+            $tablaInc .= "<td>" . $row['fecha_final'] . "</td>";
+            $tablaInc .= "<td>" . $row['material'] . "</td>";
+            $tablaInc .= "<td>" . $row['comentario'] . "</td>";
+            $tablaInc .= "<td>" . $row['comentarioAdm'] . "</td>";
+            $tablaInc .= "<td>" . $row['aula'] . "</td>";
+            switch ($row['estado']) {
+                case 0:
+                    $tablaInc .= "<td class='bg-danger estadoLista'>Pendiente</td>";
+                    break;
+                case 1:
+                    $tablaInc .= "<td class='bg-info estadoLista'>En proceso</td>";
+                    break;
+                case 2:
+                    $tablaInc .= "<td class='bg-success estadoLista'>Finalizada</td>";
+                    break;
+            }
+            $tablaInc .= "</tr>";
         }
     }
+    else{
+        $tablaInc="<tr><td colspan=7><h4>Sin incidencias</h4></td></tr>";
+    }
+    require './head.php';
+    require './inicioProf.php';
+}
+
+function incidenciasProf(){
+    $datosInci = usuario::leerIncProf();
+    $tablaInc="";
+    if ($datosInci != null) {        
+        foreach ($datosInci as $row) {
+            $tablaInc .= "<tr><td>" . $row['fecha_inicio'] . "</td>";
+            $tablaInc .= "<td>" . $row['fecha_final'] . "</td>";
+            $tablaInc .= "<td>" . $row['material'] . "</td>";
+            $tablaInc .= "<td>" . $row['comentario'] . "</td>";
+            $tablaInc .= "<td>" . $row['comentarioAdm'] . "</td>";
+            $tablaInc .= "<td>" . $row['aula'] . "</td>";
+            switch ($row['estado']) {
+                case 0:
+                    $tablaInc .= "<td class='bg-danger estadoLista'>Pendiente</td>";
+                    break;
+                case 1:
+                    $tablaInc .= "<td class='bg-info estadoLista'>En proceso</td>";
+                    break;
+                case 2:
+                    $tablaInc .= "<td class='bg-success estadoLista'>Finalizada</td>";
+                    break;
+            }
+            $tablaInc .= "</tr>";
+        }       
+    }
+    else{
+        $tablaInc="<tr><td colspan=7><h4>Sin incidencias</h4></td></tr>";
+    }
+    require './head.php';
+    require './incidenciasProf.php';
 }
