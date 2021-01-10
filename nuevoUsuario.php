@@ -12,13 +12,13 @@
                     </div>
                     <div id="items">
                         <div id="item1" class="mb-3">
-                            <a href="./inicio"><i class="fas fa-home"></i>Inicio</a>
+                            <a href="./inicio"><i class="fas fa-home"></i>Tareas pendientes</a>
                         </div>
                         <div id="item2" class="mb-3">
-                            <a href="./incidencias"><i class="fas fa-folder-open"></i>Mis incidencias</a>
+                            <a href="./resueltas"><i class="fas fa-folder-open"></i>Tareas resueltas</a>
                         </div>
                         <div id="item3" class="mb-3">
-                            <a href="./nueva" class="active"><i class="fas fa-plus"></i>Crear incidencias</a>
+                            <a href="./newUser" class="active"><i class="fas fa-plus"></i>Crear usuario</a>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="col">
                         <div id="barra-superior">
                             <div class="btitle w-50">
-                                <h1>Nueva incidencia</h1>
+                                <h1>Crear usuario</h1>
                             </div>
                             <div class="icons w-50">
                                 <div class="btn-toolbar" role="toolbar">
@@ -44,39 +44,26 @@
                 </div>
                 <div class="row w-100 h-75 justify-content-center align-content-center">
                     <div class="col-sm-5">
-                        <form action="./nueva?controller=insertar" method="post">
-                            <h4>Nueva incidencia</h4>
+                        <form action="./newUser?new=yes" method="post">
+                            <h4>Nuevo usuario</h4>
                             <div class="form-group">
-                                <label for="material">Material:</label>
-                                <select name="material" id="material" class="form-control">
-                                    <option value="raton">Raton</option>
-                                    <option value="teclado">Teclado</option>
-                                    <option value="altavoces">Altavoces</option>
-                                    <option value="pantalla">Pantalla</option>
-                                    <option value="internet">Internet</option>
-                                </select>
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
                             </div>
                             <div class="form-group">
-                                <label for="prioridad">Prioridad:</label>
-                                <select name="prioridad" id="prioridad" class="form-control">
-                                    <option value="BAJA">BAJA</option>
-                                    <option value="MEDIO">MEDIO</option>
-                                    <option value="ALTA">ALTA</option>                                    
-                                </select>
+                                <label for="contra">Contraseña:</label>
+                                <input type="password" id="contra" name="contra" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="aula">Aula:</label>
-                                <select class="form-control" id="aula" name="aula" required>
-                                    <?php
-                                    for ($i = 100; $i < 250; $i++) {
-                                        echo ("<option value='" . $i . "'>$i</option>");
-                                    }
-                                    ?>
-                                </select>
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" id="email" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="comentario">Comentario:</label>
-                                <textarea name="comentario" id="comentario" class="form-control" required></textarea>
+                                <label for="tipo">Tipo de usuario:</label>
+                                <select name="tipo" id="tipo" class="form-control">
+                                    <option value="ROLE_USER">Usuario</option>
+                                    <option value="ROLE_ADMIN">Administrador</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-outline-primary btn-block" name="enviar">Enviar</button>
@@ -89,14 +76,5 @@
     </div>
     </div>
 </body>
-<?php
-if (isset($_GET['controller'])) {
-?>
-    <script>
-        alert('Incidencia registrada!')
-    </script>
-<?php
-}
-?>
 
 </html>

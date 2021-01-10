@@ -12,13 +12,13 @@
                     </div>
                     <div id="items">
                         <div id="item1" class="mb-3">
-                            <a href="./inicio"><i class="fas fa-home"></i>Inicio</a>
+                            <a href="./inicio" class="active"><i class="fas fa-home"></i>Inicio</a>
                         </div>
                         <div id="item2" class="mb-3">
                             <a href="./incidencias"><i class="fas fa-folder-open"></i>Mis incidencias</a>
                         </div>
                         <div id="item3" class="mb-3">
-                            <a href="./nueva" class="active"><i class="fas fa-plus"></i>Crear incidencias</a>
+                            <a href="./nueva"><i class="fas fa-plus"></i>Crear incidencias</a>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="col">
                         <div id="barra-superior">
                             <div class="btitle w-50">
-                                <h1>Nueva incidencia</h1>
+                                <h1>Tareas</h1>
                             </div>
                             <div class="icons w-50">
                                 <div class="btn-toolbar" role="toolbar">
@@ -44,42 +44,26 @@
                 </div>
                 <div class="row w-100 h-75 justify-content-center align-content-center">
                     <div class="col-sm-5">
-                        <form action="./nueva?controller=insertar" method="post">
-                            <h4>Nueva incidencia</h4>
+                        <form action="./inicio?id=<?php echo($_GET['id'].'&action=final"'); ?> method="post">
+                            <h4>Cerrar incidencia</h4>
                             <div class="form-group">
                                 <label for="material">Material:</label>
-                                <select name="material" id="material" class="form-control">
-                                    <option value="raton">Raton</option>
-                                    <option value="teclado">Teclado</option>
-                                    <option value="altavoces">Altavoces</option>
-                                    <option value="pantalla">Pantalla</option>
-                                    <option value="internet">Internet</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="prioridad">Prioridad:</label>
-                                <select name="prioridad" id="prioridad" class="form-control">
-                                    <option value="BAJA">BAJA</option>
-                                    <option value="MEDIO">MEDIO</option>
-                                    <option value="ALTA">ALTA</option>                                    
-                                </select>
+                                <input type="text" class="form-control" id="material" name="material" readonly value=<?php echo ("'" . $datosInci['material'] . "'") ?>>
                             </div>
                             <div class="form-group">
                                 <label for="aula">Aula:</label>
-                                <select class="form-control" id="aula" name="aula" required>
-                                    <?php
-                                    for ($i = 100; $i < 250; $i++) {
-                                        echo ("<option value='" . $i . "'>$i</option>");
-                                    }
-                                    ?>
-                                </select>
+                                <input type="text" class="form-control" id="aula" name="aula" readonly value=<?php echo ("'" . $datosInci['aula'] . "'") ?>>
                             </div>
                             <div class="form-group">
-                                <label for="comentario">Comentario:</label>
-                                <textarea name="comentario" id="comentario" class="form-control" required></textarea>
+                                <label for="comentario">Comentario del profesor:</label>
+                                <input type="text" class="form-control" id="comentario" name="comentario" readonly value=<?php echo ("'" . $datosInci['comentario'] . "'") ?>>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-outline-primary btn-block" name="enviar">Enviar</button>
+                                <label for="comentarioadm">Comentario sobre la averia:</label>
+                                <textarea name="comentarioAdm" id="comentarioadm" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline-primary btn-block" name="finalizar">Finalizar</button>
                             </div>
                         </form>
                     </div>
@@ -89,14 +73,5 @@
     </div>
     </div>
 </body>
-<?php
-if (isset($_GET['controller'])) {
-?>
-    <script>
-        alert('Incidencia registrada!')
-    </script>
-<?php
-}
-?>
 
 </html>

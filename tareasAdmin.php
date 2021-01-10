@@ -4,7 +4,6 @@
         $("#incidencias").DataTable();
     });
 </script>
-
 <body>
     <div class="container-fluid mx-0 px-0 my-0 py-0 h-100">
         <!-- Fila principal -->
@@ -17,13 +16,13 @@
                     </div>
                     <div id="items">
                         <div id="item1" class="mb-3">
-                            <a href="./inicio" ><i class="fas fa-home"></i>Inicio</a>
+                            <a href="./inicio" class="active"><i class="fas fa-home"></i>Tareas pendientes</a>
                         </div>
                         <div id="item2" class="mb-3">
-                            <a href="./incidencias" class="active"><i class="fas fa-folder-open"></i>Mis incidencias</a>
+                            <a href="./resueltas"><i class="fas fa-folder-open"></i>Tareas resueltas</a>
                         </div>
                         <div id="item3" class="mb-3">
-                            <a href="./nueva"><i class="fas fa-plus"></i>Crear incidencias</a>
+                            <a href="./newUser"><i class="fas fa-plus"></i>Crear usuario</a>
                         </div>
                     </div>
                 </div>
@@ -34,7 +33,7 @@
                     <div class="col">
                         <div id="barra-superior">
                             <div class="btitle w-50">
-                                <h1>Mis incidencias</h1>
+                                <h1>Tareas</h1>
                             </div>
                             <div class="icons w-50">
                                 <div class="btn-toolbar" role="toolbar">
@@ -47,25 +46,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mx-0 px-0 w-100 h-75">
-                    <div class="col mr-2 ml-2 mt-2 h-100" style="overflow-y:scroll">
+                <div class="row h-75">
+                <div class="col mr-2 ml-2 mt-2 h-100" style="overflow-y:scroll">
                         <table id="incidencias" class="table table-striped table-bordered table-hover"
-                         style="width: 100%; height:100%">
+                         style="width: 100%; height:100%;">
                             <thead>
                                 <tr>
+                                <th>Usuario</th>
                                     <th>Fecha peticion</th>
-                                    <th>Fecha final</th>
                                     <th>Material</th>
                                     <th>Comentario</th>
-                                    <th>Comentario del tecnico</th>
                                     <th>Aula</th>
                                     <th>Prioridad</th>
                                     <th>Estado</th>
+                                    <th>Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php echo $tablaInc ?>
+                                <?php echo($tablaTareas); ?>
                             </tbody>
+                            <tfoot>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
