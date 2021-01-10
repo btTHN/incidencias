@@ -60,7 +60,7 @@ function inicioProf()
                     $resueltas++;
                     break;
             }
-        }       
+        }
     }
 
     /**
@@ -91,18 +91,26 @@ function inicioProf()
             }
             $tablaInc .= "</tr>";
         }
-    }
-    else{
-        $tablaInc="<tr><td colspan=7><h4>Sin incidencias</h4></td></tr>";
+    } else {
+        $tablaInc = "<tr><td colspan=7><h4>Sin incidencias</h4></td></tr>";
     }
     require './head.php';
     require './inicioProf.php';
 }
 
-function incidenciasProf(){
+/**
+ * Crea una variable de tipo string
+ * que contiene una tabla con las incidencias
+ * encontradas en la base de datos
+ * si se da el caso que no hay incidencias
+ * llenara esa tabla con la frase
+ * "Sin incidencias"
+ */
+function incidenciasProf()
+{
     $datosInci = usuario::leerIncProf();
-    $tablaInc="";
-    if ($datosInci != null) {        
+    $tablaInc = "";
+    if ($datosInci != null) {
         foreach ($datosInci as $row) {
             $tablaInc .= "<tr><td>" . $row['fecha_inicio'] . "</td>";
             $tablaInc .= "<td>" . $row['fecha_final'] . "</td>";
@@ -122,11 +130,22 @@ function incidenciasProf(){
                     break;
             }
             $tablaInc .= "</tr>";
-        }       
-    }
-    else{
-        $tablaInc="<tr><td colspan=7><h4>Sin incidencias</h4></td></tr>";
+        }
+    } else {
+        $tablaInc = "<tr><td colspan=7><h4>Sin incidencias</h4></td></tr>";
     }
     require './head.php';
     require './incidenciasProf.php';
+}
+
+function nuevaIncidencia()
+{
+    require './head.php';
+    require './nuevaProf.php';
+}
+
+function insertarIncidencia(){
+    usuario::insertarIncidencia($_SESSION['id_us'],$_POST['material'],$_POST['comentario'],$_POST['aula']);
+    require './head.php';
+    require './nuevaProf.php';       
 }

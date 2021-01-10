@@ -49,12 +49,19 @@ class usuario
         $stm = $link->query('SELECT fecha_inicio,fecha_final,
         material,comentario,comentarioAdm,aula,estado 
         FROM incidencias 
-        WHERE id_usuario = ' . $_SESSION['id_us'] . ' ORDER BY '. 1 .' DESC LIMIT '. 0 .','. 5);
+        WHERE id_usuario = ' . $_SESSION['id_us'] . ' ORDER BY ' . 1 . ' DESC LIMIT ' . 0 . ',' . 5);
         if ($stm->rowCount() == 0) {
             return null;
         } else {
             $result = $stm->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         }
+    }
+
+    public static function insertarIncidencia($user,$material,$comen,$aula)
+    {
+        $link = connection::conectar();
+        $stm = "INSERT INTO incidencias (id_usuario, material, comentario, aula) VALUES (".$user.",'".$material."','".$comen."',".$aula.")";
+        $link->exec($stm);
     }
 }

@@ -19,4 +19,8 @@ if ($uri2 == 'index.php' && $path == '/inicio') {
     index();
 } elseif ($uri2 == 'index.php' && $path == '/incidencias') {
     incidenciasProf();
+} elseif ($uri2 == 'index.php' && $path == '/nueva' && isset($_GET['controller'])) {
+    insertarIncidencia();
+} elseif ($uri2 == 'index.php' && $path == '/nueva') {
+    nuevaIncidencia();
 }
