@@ -2,6 +2,9 @@
 
 /**
  * NO ES RESPONSIVE
+ * 
+ * ADJUNTO ARCHIVO SQL CON LAS TABLAS PARA QUE NO HAYA NINGUN ERROR 
+ * SOLO HACE FALTA TENER LA BASE DE DATOS CON EL NOMBRE "jnoguera_gestion_incidencia"
  */
 require_once './controllers.php';
 require_once './model.php';
