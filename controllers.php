@@ -75,6 +75,7 @@ function inicioProf()
      * Creara una tabla con las 5 incidencias recientes
      * si no encuentra incidencias por defecto mostrara
      * "Sin incidencias"
+     * hola
      */
     $datosInci = usuario::incidenciasRecientes();
     if ($datosInci != null) {
